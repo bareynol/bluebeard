@@ -1,5 +1,5 @@
 const initialState = {
-  stats: {},
+  stats: null,
   isFetching: false,
   error: null,
 }
