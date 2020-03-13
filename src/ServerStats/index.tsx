@@ -6,6 +6,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { View, Text, ScrollView } from 'react-native';
 import moment from 'moment';
 
+import CpuTemperature from 'components/CpuTemperature';
+import MemUsage from 'components/MemUsage';
+import DiskUsage from 'components/DiskUsage';
+
 
 export default function ServerStats() {
   const isFetching = useSelector(state => state.serverStats.isFetching);
@@ -25,6 +29,17 @@ export default function ServerStats() {
     <View style={{flex: 1}}>
       <ScrollView>
         <Text>Server Stats</Text>
+        <CpuTemperature temperature={stats.hardware.cpu.temperature} />
+        {stats.hardware.disk.map(d => (
+          <DiskUsage
+            key={d.label}
+            percentage={d.percentUsed}
+            valueLabel={`${d.percentUsed}%`}
+            label={`${d.label} ${d.size}`}
+            width="30%"
+          />
+        ))}
+        <MemUsage memUsed={stats.hardware.mem.percentUsed} />
         <UptimeDisplay uptime={stats.hardware.uptime} />
         <CPUDisplay temperature={stats.hardware.cpu.temperature} />
         <DiskDisplay disks={stats.hardware.disk} />
