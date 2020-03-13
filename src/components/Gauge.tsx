@@ -5,8 +5,8 @@ import { VictoryLabel, VictoryPie } from "victory-native";
 
 // CONSTANTS
 // width / height of the svg drawing area
-const VIEW_WIDTH = 300
-const VIEW_HEIGHT = 180
+const VIEW_WIDTH = 150
+const VIEW_HEIGHT = 90
 const ASPECT_RATIO = VIEW_WIDTH / VIEW_HEIGHT;
 
 // how large of an empty center circle to leave
@@ -18,9 +18,9 @@ const INDICATOR_SIZE = 1;
 
 export default function Gauge({percentage, width, valueLabel, label, fontSize}) {
   return (
-    <View style={{width: width, backgroundColor: 'grey',}}>
+    <View style={{width: width}}>
       <View style={styles.svgContainer}>
-        <Svg width="100%" height="100%" viewBox={`0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`}>
+        <Svg width="100%" height="100%" viewBox={`-5 -10 ${VIEW_WIDTH + 10} ${VIEW_HEIGHT + 10}`}>
           <VictoryPie
             data={[
               { x: 1, y: percentage - INDICATOR_SIZE / 2},      // draws the "Filled" portion
@@ -53,7 +53,9 @@ export default function Gauge({percentage, width, valueLabel, label, fontSize}) 
                     default:
                       return "black"
                   }
-                }
+                },
+                stroke: 'white',
+                strokeWidth: 3,
               }
             }}
           />

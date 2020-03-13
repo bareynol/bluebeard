@@ -9,7 +9,7 @@ export default function CpuTemperature({temperature}){
       label="CPU Temperature"
       valueLabel={`${Math.round(temperature)} °C`}
       fontSize={50}
-      width="30%"
+      width={100}
     />
   );
 }

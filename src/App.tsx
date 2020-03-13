@@ -13,17 +13,21 @@ import { Provider as StoreProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 // import { PersistGate } from 'redux-persist/es/integration/react';
 
-import ServerStats from 'ServerStats';
+import ServerStats from 'pages/ServerStats';
 
 
 import configureStore from './store';
+import Background from 'components/ui/Background';
+
 export const {store, persistor} = configureStore()
 
 export default function App() {
   return (
     <StoreProvider store={store}>
       <PersistGate persistor={persistor} loading={null}>
-        <ServerStats />
+        <Background>
+          <ServerStats />
+        </Background>
       </PersistGate>
     </StoreProvider>
   )

@@ -9,7 +9,7 @@ export default class MemUsage extends React.Component {
         percentage={this.props.memUsed}
         label="Mem. Usage"
         valueLabel={`${Math.round(this.props.memUsed)}%`}
-        width="30%"
+        width={100}
       />
     );
   }
