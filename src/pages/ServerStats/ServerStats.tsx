@@ -1,5 +1,5 @@
 
-const logo = require('images/BrianTV.png');
+const appLogo = require('images/BrianTV.png');
 import React, { useEffect, useCallback } from 'react';
 import { getServerStats } from 'services/serverStats/actions';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,6 +10,10 @@ import CpuTemperature from 'components/CpuTemperature';
 import MemUsage from 'components/MemUsage';
 import DiskInfo from 'components/DiskInfo';
 import Section from 'components/ui/Section';
+
+import { Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail, Card, CardItem, Text as NativeText } from 'native-base';
+import ServicesList from 'components/ServicesList';
+import CurrentDownloads from 'components/CurrentDownloads';
 
 
 
@@ -27,69 +31,52 @@ export default function ServerStats() {
 
   if (!stats) return null;
 
+  const {docker} = stats.services;
+
   return (
-    <View style={{flex: 1}}>
-      <ScrollView>
+    <Container>
+      <Content padder>
+        <Image source={appLogo} style={{width: '50%', height: 200, alignSelf: 'center'}} resizeMode="contain" />
 
-        <Image source={logo} style={{width: '50%', height: 200, alignSelf: 'center'}} resizeMode="contain" />
-
-        <View>
+        <View style={{marginVertical: 40}}>
           <Button title="Request Movies" onPress={() => {}} />
         </View>
 
-        <Section label="">
+        <CurrentDownloads />
+
+        <View style={{marginTop: 20}}>
+          <NativeText>Disks</NativeText>
           <View style={{flexDirection: 'row'}}>
-            {stats.hardware.disk.map(d => (
+            {stats.hardware.disk.map((d, index) => (
               <DiskInfo
                 disk={d}
                 key={d.label}
+                index={index}
               />
             ))}
           </View>
+        </View>
+
+        <View style={{marginTop: 40}}>
+          <NativeText>Hardware</NativeText>
           <View style={{flexDirection: 'row'}}>
-            <View style={{justifyContent: 'center', width: '50%'}}>
+            <View style={{alignItems: 'center', flex: 1}}>
               <CpuTemperature temperature={stats.hardware.cpu.temperature} />
               <Text style={{ color: 'white', fontSize: 16}}>CPU Temp.</Text>
             </View>
-            <View style={{justifyContent: 'center', width: '50%'}}>
+            <View style={{alignItems: 'center', flex: 1}}>
               <MemUsage memUsed={stats.hardware.mem.percentUsed} />
               <Text style={{color: 'white', fontSize: 16}}>Mem. Usage</Text>
             </View>
             
           </View>
-        </Section>
+        </View>
 
-        <Section label="Current Downloads">
-          <ProgressBar width="75%" />
-          <ProgressBar width="75%" />
-        </Section>
-
-        <Section label="Services">
-          <View>
-
-          </View>
-        </Section>
-
+        <ServicesList />
         <UptimeDisplay uptime={stats.hardware.uptime} />
-      </ScrollView>
-    </View>
+      </Content>
+    </Container>
   );
-}
-
-function ServiceInfo({service, serviceTitle}) {
-  return (
-    <View>
-      <Text style={{color: "white", fontSize: 18}}>{serviceTitle}</Text>
-    </View>
-  )
-}
-
-function ProgressBar(props) {
-  return (
-    <View style={{width: props.width || "100%", borderColor: 'white', borderWidth: 2, borderRadius: 10, height: 30}}>
-      <View style={{backgroundColor: 'white', width: '75%', height: '100%', borderRadius: 5}}></View>
-    </View>
-  )
 }
 
 function UptimeDisplay({uptime}) {

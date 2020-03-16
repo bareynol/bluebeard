@@ -11,8 +11,8 @@ export default function Background(props: any) {
         source={bgArt}
         resizeMode="cover"
         style={{width: '100%', height: '100%'}}
-        imageStyle={{width: "100%", height: '100%', tintColor: '#ffffff', opacity: 0.25}}
-        blurRadius={4}
+        imageStyle={{width: "100%", height: '100%', tintColor: '#ffffff', opacity: 0.1}}
+        blurRadius={2}
       >
         {props.children}
       </ImageBackground>
