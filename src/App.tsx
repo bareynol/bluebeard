@@ -13,11 +13,14 @@ import { Provider as StoreProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 // import { PersistGate } from 'redux-persist/es/integration/react';
 
-import ServerStats from 'pages/ServerStats';
-
-
 import configureStore from './store';
+
+import getTheme from '../native-base-theme/components';
+import customTheme from '../native-base-theme/variables/customTheme';
+
 import Background from 'components/ui/Background';
+import ServerStats from 'pages/ServerStats';
+import { StyleProvider } from 'native-base';
 
 export const {store, persistor} = configureStore()
 
@@ -25,9 +28,11 @@ export default function App() {
   return (
     <StoreProvider store={store}>
       <PersistGate persistor={persistor} loading={null}>
-        <Background>
-          <ServerStats />
-        </Background>
+        <StyleProvider style={getTheme(customTheme)}>
+          <Background>
+            <ServerStats />
+          </Background>
+        </StyleProvider>
       </PersistGate>
     </StoreProvider>
   )
