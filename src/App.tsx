@@ -18,6 +18,8 @@ import configureStore from './store';
 import getTheme from '../native-base-theme/components';
 import customTheme from '../native-base-theme/variables/customTheme';
 
+import AppRouter from './AppRouter';
+
 import Background from 'components/ui/Background';
 import ServerStats from 'pages/ServerStats';
 import { StyleProvider } from 'native-base';
@@ -29,9 +31,7 @@ export default function App() {
     <StoreProvider store={store}>
       <PersistGate persistor={persistor} loading={null}>
         <StyleProvider style={getTheme(customTheme)}>
-          <Background>
-            <ServerStats />
-          </Background>
+          <AppRouter />
         </StyleProvider>
       </PersistGate>
     </StoreProvider>
