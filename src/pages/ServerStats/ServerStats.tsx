@@ -14,10 +14,11 @@ import Section from 'components/ui/Section';
 import { Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail, Card, CardItem, Text as NativeText } from 'native-base';
 import ServicesList from 'components/ServicesList';
 import CurrentDownloads from 'components/CurrentDownloads';
+import AppHeader from 'components/AppHeader';
 
 
 
-export default function ServerStats() {
+export default function ServerStats({navigation}) {
   const isFetching = useSelector(state => state.serverStats.isFetching);
   const stats = useSelector(state => state.serverStats.stats);
 
@@ -35,8 +36,9 @@ export default function ServerStats() {
 
   return (
     <Container>
+      <AppHeader title="Dashboard" />
       <Content padder>
-        <Image source={appLogo} style={{width: '50%', height: 200, alignSelf: 'center'}} resizeMode="contain" />
+        
 
         <View style={{marginVertical: 40}}>
           <Button title="Request Movies" onPress={() => {}} />

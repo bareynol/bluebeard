@@ -6,7 +6,7 @@ const bgArt = require('images/bg_art.png');
 
 export default function Background(props: any) {
   return (
-    <LinearGradient colors={['#203064', '#09163c', '#0c1121']} style={{flex: 1}}>
+    <LinearGradient colors={['#203064', '#09163c', '#0c1121']} style={[{flex: 1}, props.style]}>
       <ImageBackground
         source={bgArt}
         resizeMode="cover"
