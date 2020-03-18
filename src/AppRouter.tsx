@@ -7,21 +7,33 @@ import Background from 'components/ui/Background';
 import SideBar from 'components/SideBar';
 import Plex from 'pages/Plex';
 import Sonarr from 'pages/Sonarr';
+import Radarr from 'pages/Radarr';
 import Ombi from 'pages/Ombi';
+import Tautulli from 'pages/Tautulli';
+import Transmission from 'pages/Transmission';
+import Jackett from 'pages/Jackett';
 import { Thumbnail } from 'native-base';
 
 const appLogo = require('images/BrianTV.png');
 const plexLogo = require('images/plex_logo.png');
 const sonarrLogo = require('images/sonarr_logo.png');
+const radarrLogo = require('images/radarr_logo.png');
 const ombiLogo = require('images/ombi_logo.png');
+const transmissionLogo = require('images/transmission_logo.png');
+const tautulliLogo = require('images/tautulli_logo.png');
+const jackettLogo = require('images/jackett_logo.png');
 
 const Drawer = createDrawerNavigator();
 
 const SCREENS = [
-  {name: "Dashboard", component: ServerStats, icon: appLogo},
-  {name: "Plex", component: Plex, icon: plexLogo},
-  {name: "Sonarr", component: Sonarr, icon: sonarrLogo},
-  {name: "Ombi", component: Ombi, icon: ombiLogo},
+  {name: "Dashboard", component: ServerStats, icon: appLogo,},
+  {name: "Ombi (easy requests)", component: Ombi, icon: ombiLogo, options: {serviceName: 'ombi'}},
+  {name: "Tautulli", component: Tautulli, icon: tautulliLogo, options: {serviceName: 'tautulli'}},
+  {name: "Transmission (torrents)", component: Transmission, icon: transmissionLogo, options: {serviceName: 'transmission'}},
+  {name: "Plex", component: Plex, icon: plexLogo, options: {serviceName: 'plex'}},
+  {name: "Sonarr", component: Sonarr, icon: sonarrLogo, options: {serviceName: 'sonarr'}},
+  {name: "Radarr", component: Radarr, icon: radarrLogo, options: {serviceName: 'radarr'}},
+  {name: "Jackett", component: Jackett, icon: jackettLogo, options: {serviceName: 'jackett'}},
 ]
 
 export default function AppRouter() {
@@ -49,7 +61,8 @@ function getDrawerScreen(props) {
       key={props.name}
       options={{
         ...props.options,
-        drawerIcon: (drawerIconProps) => <SidebarIcon {...drawerIconProps} source={props.icon} />
+        drawerIcon: (drawerIconProps) => <SidebarIcon {...drawerIconProps} source={props.icon} />,
+
       }}
     />
   )
