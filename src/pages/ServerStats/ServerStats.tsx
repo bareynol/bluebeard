@@ -15,19 +15,23 @@ import { Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnai
 import ServicesList from 'components/ServicesList';
 import CurrentDownloads from 'components/CurrentDownloads';
 import AppHeader from 'components/AppHeader';
+import { getTorrents } from 'services/torrents/actions';
 
 
 
 export default function ServerStats({navigation}) {
-  const isFetching = useSelector(state => state.serverStats.isFetching);
+  const isFetchingStats = useSelector(state => state.serverStats.isFetching);
   const stats = useSelector(state => state.serverStats.stats);
+  
 
   const dispatch = useDispatch();
 
   const getStats = useCallback(() => dispatch(getServerStats), [dispatch]);
+  const fetchTorrents = useCallback(() => dispatch(getTorrents()), [dispatch]);
 
   useEffect(() => {
     getStats();
+    fetchTorrents();
   }, []);
 
   if (!stats) return null;
