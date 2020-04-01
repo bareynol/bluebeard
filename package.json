@@ -15,6 +15,7 @@
     "@react-navigation/drawer": "^5.3.0",
     "@react-navigation/native": "^5.1.0",
     "@types/react-redux": "^7.1.7",
+    "@types/redux-api-middleware": "^3.0.7",
     "@types/victory": "^33.1.4",
     "moment": "^2.24.0",
     "native-base": "^2.13.12",
@@ -27,6 +28,7 @@
     "react-native-screens": "^2.3.0",
     "react-native-svg": "^12.0.3",
     "react-native-vector-icons": "^6.6.0",
+    "react-native-webview": "^8.2.1",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-api-middleware": "^3.2.0",
@@ -49,6 +51,7 @@
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
+    "react-native-dotenv": "^0.2.0",
     "react-test-renderer": "16.9.0",
     "typescript": "^3.7.3"
   },
