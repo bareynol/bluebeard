@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from "react-native"
-import {Text} from 'native-base';
+import {Text, Icon} from 'native-base';
 import { prettySize } from "utils/formatters";
 import moment from "moment";
 
@@ -12,13 +12,13 @@ export default function TorrentInfo({torrent}) {
         {torrent.percentDone === 1 && (
           <>
             <Text note>{`Seeding to ${torrent.peersGettingFromUs} of ${torrent.peersConnected} peers`}</Text>
-            <Text note>{`↑ ${prettySize(torrent.rateUpload)}/s`}</Text>
+            <Text note><Icon name="arrow-up" style={{fontSize: 14}} /> {`${prettySize(torrent.rateUpload)}/s`}</Text>
           </>
         )}
         {torrent.percentDone < 1 && (
           <>
             <Text note>{`Downloading from ${torrent.peersGettingFromUs} of ${torrent.peersConnected} peers`}</Text>
-            <Text note>{`↓ ${prettySize(torrent.rateUpload)}/s`}</Text>
+            <Text note><Icon name="arrow-down" style={{fontSize: 14}} /> {`${prettySize(torrent.rateUpload)}/s`}</Text>
           </>
         )}
       </View>

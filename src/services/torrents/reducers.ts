@@ -1,4 +1,5 @@
 const initialState = {
+  torrentStats: {},
   torrents: [],
   isFetching: false,
   error: null,
@@ -29,6 +30,11 @@ export default (state=initialState, action) => {
         ...state,
         isFetching: false,
         error: action.payload.response
+      }
+    case "TORRENT_STATS_SUCCESS":
+      return {
+        ...state,
+        torrentStats: action.payload.arguments,
       }
     default:
       return state

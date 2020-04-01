@@ -27,7 +27,7 @@ const Drawer = createDrawerNavigator();
 
 const SCREENS = [
   {name: "Dashboard", component: ServerStats, icon: appLogo,},
-  {name: "Ombi (easy requests)", component: Ombi, icon: ombiLogo, options: {serviceName: 'ombi'}},
+  {name: "Ombi", component: Ombi, icon: ombiLogo, options: {serviceName: 'ombi'}},
   {name: "Tautulli", component: Tautulli, icon: tautulliLogo, options: {serviceName: 'tautulli'}},
   {name: "Transmission (torrents)", component: Transmission, icon: transmissionLogo, options: {serviceName: 'transmission'}},
   {name: "Plex", component: Plex, icon: plexLogo, options: {serviceName: 'plex'}},

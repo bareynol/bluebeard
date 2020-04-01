@@ -7,7 +7,7 @@ export function getTorrents() {
   return async (dispatch, getState) => {
     const sessionId = await dispatch(getTransmissionSessionId());
     
-    return dispatch(createAction({
+    const torrentDataRequest = dispatch(createAction({
       endpoint: `${serviceAddresses.transmission}/transmission/rpc`,
       method: 'POST',
       headers: {
@@ -27,6 +27,22 @@ export function getTorrents() {
       }),
       types: ['TORRENT_REQUEST', 'TORRENT_SUCCESS', 'TORRENT_FAILURE']
     }))
+    
+    const torrentStatsDataRequest = dispatch(createAction({
+      endpoint: `${serviceAddresses.transmission}/transmission/rpc`,
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Basic ${TRANSMISSION_AUTH_TOKEN}`,
+        "X-Transmission-Session-Id": sessionId,
+      },
+      body: JSON.stringify({
+        method: "session-stats",
+      }),
+      types: ['TORRENT_STATS_REQUEST', 'TORRENT_STATS_SUCCESS', 'TORRENT_STATS_FAILURE']
+    }))
+
+    return Promise.all([torrentDataRequest, torrentStatsDataRequest]);
   }
 }
 
