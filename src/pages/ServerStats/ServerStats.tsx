@@ -13,21 +13,24 @@ import Section from 'components/ui/Section';
 
 import { Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail, Card, CardItem, Text as NativeText } from 'native-base';
 import ServicesList from 'components/ServicesList';
-import CurrentDownloads from 'components/CurrentDownloads';
+import { CurrentDownloadsSummary }from 'components/CurrentDownloads/CurrentDownloads';
 import AppHeader from 'components/AppHeader';
+import { getTorrents } from 'services/torrents/actions';
 
 
 
 export default function ServerStats({navigation}) {
-  const isFetching = useSelector(state => state.serverStats.isFetching);
+  const isFetchingStats = useSelector(state => state.serverStats.isFetching);
   const stats = useSelector(state => state.serverStats.stats);
-
+  
   const dispatch = useDispatch();
 
   const getStats = useCallback(() => dispatch(getServerStats), [dispatch]);
+  const fetchTorrents = useCallback(() => dispatch(getTorrents()), [dispatch]);
 
   useEffect(() => {
     getStats();
+    fetchTorrents();
   }, []);
 
   if (!stats) return null;
@@ -41,10 +44,10 @@ export default function ServerStats({navigation}) {
         
 
         <View style={{marginVertical: 40}}>
-          <Button title="Request Movies" onPress={() => {}} />
+          <Button title="Request Movies" onPress={() => {navigation.navigate('Ombi')}} />
         </View>
 
-        <CurrentDownloads />
+        <CurrentDownloadsSummary />
 
         <View style={{marginTop: 20}}>
           <NativeText>Disks</NativeText>
@@ -75,7 +78,7 @@ export default function ServerStats({navigation}) {
         </View>
 
         <ServicesList />
-        <UptimeDisplay uptime={stats.hardware.uptime} />
+        {/* <UptimeDisplay uptime={stats.hardware.uptime} /> */}
       </Content>
     </Container>
   );

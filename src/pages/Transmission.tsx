@@ -1,23 +1,22 @@
 import React from 'react';
 import { Container, Content, Text } from 'native-base';
-import { View } from 'react-native';
-import { WebView } from 'react-native-webview';
+import { View, Button } from 'react-native';
 
-import {serviceAddresses} from 'config';
 import AppHeader from 'components/AppHeader';
-// import CustomHeaderWebView from 'components/CustomHeaderWebView';
+import CurrentDownloads from 'components/CurrentDownloads';
 
 export default function Transmission() {
-  console.log({serviceAddresses})
+
   return (
     <Container>
       <AppHeader title="Transmission" />
-      {/* <CustomHeaderWebView
-        source={{
-          uri: serviceAddresses.transmission,
-          headers: {"Authorization": "Basic YnJpYW46VGVzdGluZyQk"},
-        }}
-      /> */}
+      <Content padder>
+        <View style={{marginVertical: 40}}>
+          <Button title="Open Transmission" onPress={() => {}} />
+        </View>
+        
+        <CurrentDownloads />
+      </Content>
     </Container>
   )
 }

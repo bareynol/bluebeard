@@ -1,63 +1,84 @@
 import React from 'react';
-import { Card, CardItem, Text, Body, Right, List, ListItem, Grid, Row, Col } from "native-base";
-import { View } from 'react-native';
+import { Card, CardItem, Text, Body, Right, List, ListItem, Grid, Row, Col, Title, Icon } from "native-base";
+import { View, ActivityIndicator, NativeModules, Button } from 'react-native';
+import { useSelector } from 'react-redux';
+import TorrentInfo from './TorrentInfo';
+import { prettySize } from 'utils/formatters';
+import { useNavigation } from '@react-navigation/native';
 
 export default function CurrentDownloads(props) {
+  const isFetching = useSelector(state => state.torrents?.isFetching)
+  const torrents = useSelector(state => state.torrents?.torrents);
+
+
   return (
     <Card>
       <CardItem header bordered>
         <Text>Current Downloads</Text>
       </CardItem>
+      {!torrents && isFetching && (
+        <CardItem>
+          <Body style={{alignItems: 'center'}}>
+            <ActivityIndicator color="white" size={100} />
+            <Title>Loading</Title>
+          </Body>
+        </CardItem>
+      )}
       <List>
-        <ListItem>
-          <DownloadItem
-            title="One Piece Episode 906"
-            percentage={75}
-            timeRemaining="5 mins"
-          />
-        </ListItem>
-        <ListItem>
-          <DownloadItem
-            title="One Piece Episode 907"
-            percentage={33}
-            timeRemaining="22 mins"
-          />
-          
-        </ListItem>
-        <ListItem>
-          <DownloadItem
-            title="One Piece Episode 905"
-            percentage={25}
-            timeRemaining="15 mins"
-          />
-        </ListItem>
+        {!torrents && !isFetching && (
+          <ListItem>
+            <Text>No torrents to display</Text>
+          </ListItem>
+        )}
+        {torrents.map(t => (
+          <ListItem key={t.id}>
+            <TorrentInfo torrent={t} />
+          </ListItem>
+        ))}
       </List>
     </Card>
   )
 }
 
-function DownloadItem(props) {
+function CurrentDownloadsSummary(props) {
+  const isFetching = useSelector(state => state.torrents?.isFetching)
+  const torrentStats = useSelector(state => state.torrents?.torrentStats);
+  const navigator = useNavigation();
+
   return (
-    <View style={{flex: 1}}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Text>{props.title}</Text>
-        <Text note>{props.timeRemaining}</Text>
-      </View>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-        <View style={{width: '75%'}}>
-          <ProgressBar percentage={props.percentage} />
+    <Card>
+      <CardItem header bordered style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Text>Current Downloads</Text>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text note style={{marginRight: 20}}>
+            <Icon name="arrow-down" style={{fontSize: 14}} /> {`${prettySize(torrentStats.downloadSpeed)}/s`}
+          </Text>
+          <Text note>
+            <Icon name="arrow-up" style={{fontSize: 14}} /> {`${prettySize(torrentStats.uploadSpeed)}/s`}
+          </Text>
         </View>
-        <View><Text>{`${props.percentage}%`}</Text></View>
-      </View>
-    </View>
+      </CardItem>
+      {!torrentStats && isFetching && (
+        <CardItem>
+          <Body style={{alignItems: 'center'}}>
+            <ActivityIndicator color="white" size={100} />
+            <Title>Loading</Title>
+          </Body>
+        </CardItem>
+      )}
+      <CardItem>
+        <Body>
+          <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20}}>
+            <Text>{`Active Torrents: ${torrentStats?.activeTorrentCount}`}</Text>
+            <Text>{`Paused Torrents: ${torrentStats?.pausedTorrentCount}`}</Text>
+          </View>
+          <View style={{alignSelf: 'center'}}>
+            <Button title="View Details" onPress={() => {navigator.navigate('Transmission (torrents)')}} />
+          </View>
+        </Body>
+      </CardItem>
+    </Card>
   )
 }
 
-
-function ProgressBar(props) {
-  return (
-    <View style={{width: props.width || "100%", borderColor: 'white', borderWidth: 2, borderRadius: 10, height: 30}}>
-      <View style={{backgroundColor: 'white', width: `${props.percentage}%`, height: '100%', borderRadius: 5, justifyContent: 'center'}} />
-    </View>
-  )
-}
+export {CurrentDownloadsSummary};
