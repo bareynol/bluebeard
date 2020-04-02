@@ -3,13 +3,13 @@ import {serviceAddresses} from 'config';
 
 import { Container} from 'native-base';
 import AppHeader from 'components/AppHeader';
-import WebView from 'react-native-webview';
+import WebViewWrapper from 'components/ui/WebViewWrapper'
 
 export default function Tautulli() {
   return (
     <Container>
       <AppHeader title="Tautulli" />
-      <WebView
+      <WebViewWrapper
         source={{
           uri: serviceAddresses.tautulli,
         }}

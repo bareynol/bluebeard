@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Content, Text } from 'native-base';
-import { View, Button } from 'react-native';
+import {serviceAddresses} from 'config';
+import { Container, Content} from 'native-base';
+import { View, Button, Linking } from 'react-native';
 
 import AppHeader from 'components/AppHeader';
 import CurrentDownloads from 'components/CurrentDownloads';
@@ -12,7 +13,9 @@ export default function Transmission() {
       <AppHeader title="Transmission" />
       <Content padder>
         <View style={{marginVertical: 40}}>
-          <Button title="Open Transmission" onPress={() => {}} />
+          <Button title="Open Transmission" onPress={() => {
+            Linking.openURL(`${serviceAddresses.transmission}`)
+          }} />
         </View>
         
         <CurrentDownloads />

@@ -3,7 +3,7 @@ import {serviceAddresses} from 'config';
 
 import { Container } from 'native-base';
 import AppHeader from 'components/AppHeader';
-import WebView from 'react-native-webview';
+import WebViewWrapper from 'components/ui/WebViewWrapper'
 
 import {SONARR_USERNAME, SONARR_PASSWORD} from 'react-native-dotenv';
 
@@ -11,7 +11,7 @@ export default function Sonarr() {
   return (
     <Container>
       <AppHeader title="Sonarr" />
-      <WebView
+      <WebViewWrapper
         source={{
           uri: `${serviceAddresses.sonarr}/login?returnUrl=/`,
           method: "POST",

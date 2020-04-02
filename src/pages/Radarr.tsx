@@ -3,7 +3,7 @@ import {serviceAddresses} from 'config';
 
 import { Container } from 'native-base';
 import AppHeader from 'components/AppHeader';
-import WebView from 'react-native-webview';
+import WebViewWrapper from 'components/ui/WebViewWrapper'
 
 import {RADARR_USERNAME, RADARR_PASSWORD} from 'react-native-dotenv';
 
@@ -11,7 +11,7 @@ export default function Radarr() {
   return (
     <Container>
       <AppHeader title="Radarr" />
-      <WebView
+      <WebViewWrapper
         source={{
           uri: `${serviceAddresses.radarr}/login?returnUrl=/`,
           method: "POST",

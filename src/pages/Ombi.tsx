@@ -3,7 +3,7 @@ import {serviceAddresses} from 'config';
 
 import { Container} from 'native-base';
 import AppHeader from 'components/AppHeader';
-import WebView from 'react-native-webview';
+import WebViewWrapper from 'components/ui/WebViewWrapper'
 
 import {OMBI_USERNAME, OMBI_PASSWORD} from 'react-native-dotenv';
 
@@ -39,7 +39,7 @@ export default function Ombi() {
   return (
     <Container>
       <AppHeader title="Ombi" />
-      <WebView
+      <WebViewWrapper
         ref={webviewRef}
         domStorageEnabled={true}
         source={{uri: `${serviceAddresses.ombi}/search`}}
