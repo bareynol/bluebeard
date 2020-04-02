@@ -75,6 +75,7 @@ const WebViewWrapper = React.forwardRef((webviewProps, ref): JSX.Element => {
       injectedJavaScript={PUSH_STATE_NAVIGATION_LISTENER}
       onNavigationStateChange={onNavigationStateChange}
       onMessage={onMessage}
+      style={[{backgroundColor: 'transparent'}, webviewProps.style]}
       ref={combinedRef}
     />
   )

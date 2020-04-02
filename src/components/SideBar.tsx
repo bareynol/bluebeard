@@ -14,7 +14,7 @@ export default function SideBar(props) {
       <DrawerContentScrollView {...props}>
         <Image
           square
-          style={{height: 200, width: '50%', alignSelf: 'center'}}
+          style={{height: 175, width: '50%', alignSelf: 'center'}}
           source={logo}
           resizeMode="contain"
         />

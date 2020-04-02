@@ -17,6 +17,7 @@ import { CurrentDownloadsSummary }from 'components/CurrentDownloads/CurrentDownl
 import AppHeader from 'components/AppHeader';
 import { getTorrents } from 'services/torrents/actions';
 
+import SplashScreen from 'react-native-splash-screen'
 
 
 export default function ServerStats({navigation}) {
@@ -32,6 +33,11 @@ export default function ServerStats({navigation}) {
     getStats();
     fetchTorrents();
   }, []);
+
+  useEffect(() => {
+    console.log("hiding splash")
+    SplashScreen.hide();
+  }, [])
 
   if (!stats) return null;
 
