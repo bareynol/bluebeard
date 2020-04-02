@@ -27,12 +27,12 @@ const Drawer = createDrawerNavigator();
 
 const SCREENS = [
   {name: "Dashboard", component: ServerStats, icon: appLogo,},
-  {name: "Ombi", component: Ombi, icon: ombiLogo, options: {serviceName: 'ombi'}},
-  {name: "Tautulli", component: Tautulli, icon: tautulliLogo, options: {serviceName: 'tautulli'}},
-  {name: "Transmission (torrents)", component: Transmission, icon: transmissionLogo, options: {serviceName: 'transmission'}},
+  {name: "Ombi", component: Ombi, icon: ombiLogo, options: {serviceName: 'ombi', title: "Ombi (Easy Requests)"}},
+  {name: "Sonarr", component: Sonarr, icon: sonarrLogo, options: {serviceName: 'sonarr', title: "Sonarr (TV Series)"}},
+  {name: "Radarr", component: Radarr, icon: radarrLogo, options: {serviceName: 'radarr', title: "Radarr (Movies)"}},
+  {name: "Transmission", component: Transmission, icon: transmissionLogo, options: {serviceName: 'transmission', title: "Transmission (Torrents)"}},
+  {name: "Tautulli", component: Tautulli, icon: tautulliLogo, options: {serviceName: 'tautulli', title: "Tautulli (Plex Stats)"}},
   {name: "Plex", component: Plex, icon: plexLogo, options: {serviceName: 'plex'}},
-  {name: "Sonarr", component: Sonarr, icon: sonarrLogo, options: {serviceName: 'sonarr'}},
-  {name: "Radarr", component: Radarr, icon: radarrLogo, options: {serviceName: 'radarr'}},
   {name: "Jackett", component: Jackett, icon: jackettLogo, options: {serviceName: 'jackett'}},
 ]
 

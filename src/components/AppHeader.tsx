@@ -10,16 +10,17 @@ export default function AppHeader({title}) {
   const navigation = useNavigation();
   return (
     <Header>
-      <Left style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingRight: 60}}>
+      <Left style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
         <Button transparent onPress={() => navigation.openDrawer()}>
           <Icon name="menu" type="MaterialIcons" />
         </Button>
-        <Thumbnail source={appLogo} small square style={{marginLeft: 10}} />
       </Left>
       <Body style={{flexDirection: 'row'}}>
         <Title>{title}</Title>
       </Body>
-      <Right />
+      <Right>
+        <Thumbnail source={appLogo} small square />
+      </Right>
     </Header>
   )
 }

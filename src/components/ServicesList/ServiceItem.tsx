@@ -9,7 +9,7 @@ export default function ServiceItem({logo, service, title}: Props){
   return (
     <ListItem avatar>
       <Left>
-        {logo ? <Thumbnail source={logo} /> : <View style={{width: 56, height: 56}}></View> }
+        {logo ? <Thumbnail square small source={logo} /> : <View style={{width: 36, height: 36}}></View> }
       </Left>
       <Body style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View>

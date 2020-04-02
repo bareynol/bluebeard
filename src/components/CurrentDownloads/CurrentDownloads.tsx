@@ -73,7 +73,7 @@ function CurrentDownloadsSummary(props) {
             <Text>{`Paused Torrents: ${torrentStats?.pausedTorrentCount}`}</Text>
           </View>
           <View style={{alignSelf: 'center'}}>
-            <Button title="View Details" onPress={() => {navigator.navigate('Transmission (torrents)')}} />
+            <Button title="View Details" onPress={() => {navigator.navigate('Transmission')}} />
           </View>
         </Body>
       </CardItem>
