@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import { BackHandler } from 'react-native';
 import WebView from 'react-native-webview';
+import { useFocusEffect } from '@react-navigation/native';
 
 function useCombinedRefs(...refs) {
   const targetRef = React.useRef()
@@ -30,6 +31,8 @@ const WebViewWrapper = React.forwardRef((webviewProps, ref): JSX.Element => {
 
   const [canGoBack, setCanGoBack] = useState(false);
 
+  // typical case for detecting if webview navigation state has changed
+  // and whether the webview instance can go back a page
   const onNavigationStateChange = (navState) => {
     webviewProps.onNavigationStateChange?.(navState);
     if (navState) {
@@ -37,6 +40,9 @@ const WebViewWrapper = React.forwardRef((webviewProps, ref): JSX.Element => {
     }
   }
 
+  // for push state routing, listens for injected javascript that signals
+  // that navigation state has changed and whether the webview instance
+  // can go back a page
   const onMessage = (event) => {
     webviewProps.onMessage?.(event);
     if (event?.nativeEvent) {
@@ -52,12 +58,16 @@ const WebViewWrapper = React.forwardRef((webviewProps, ref): JSX.Element => {
     return false;
   };
 
-  useEffect((): (() => void) => {
-    BackHandler.addEventListener('hardwareBackPress', onAndroidBackPress);
-    return (): void => {
-      BackHandler.removeEventListener('hardwareBackPress', onAndroidBackPress);
-    };
-  }, [canGoBack]); // update the event listener handler when canGoBack changes
+  // adds an event listener for the back button press, updates the listener
+  // when canGoBack changes
+  useFocusEffect(
+    useCallback((): (() => void) => {
+      BackHandler.addEventListener('hardwareBackPress', onAndroidBackPress);
+      return (): void => {
+        BackHandler.removeEventListener('hardwareBackPress', onAndroidBackPress);
+      };
+    }, [canGoBack]) // update the event listener handler when canGoBack changes
+  );
 
   return (
     <WebView
@@ -70,6 +80,9 @@ const WebViewWrapper = React.forwardRef((webviewProps, ref): JSX.Element => {
   )
 })
 
+// javascript injected into the webview that signals the 
+// react native app when push state routed sites change
+// their navigation state
 const PUSH_STATE_NAVIGATION_LISTENER = `
 (function() {
   function wrap(fn) {
