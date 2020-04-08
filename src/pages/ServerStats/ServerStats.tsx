@@ -24,15 +24,6 @@ export default function ServerStats({navigation}) {
   const isFetchingStats = useSelector(state => state.serverStats.isFetching);
   const stats = useSelector(state => state.serverStats.stats);
   
-  const dispatch = useDispatch();
-
-  const getStats = useCallback(() => dispatch(getServerStats), [dispatch]);
-  const fetchTorrents = useCallback(() => dispatch(getTorrents()), [dispatch]);
-
-  useEffect(() => {
-    getStats();
-    fetchTorrents();
-  }, []);
 
   useEffect(() => {
     console.log("hiding splash")

@@ -13,6 +13,7 @@ import Tautulli from 'pages/Tautulli';
 import Transmission from 'pages/Transmission';
 import Jackett from 'pages/Jackett';
 import { Thumbnail } from 'native-base';
+import RefreshData from 'RefreshData';
 
 const appLogo = require('images/BrianTV.png');
 const plexLogo = require('images/plex_logo.png');
@@ -39,6 +40,7 @@ const SCREENS = [
 export default function AppRouter() {
   return (
     <NavigationContainer>
+      <RefreshData />
       <Background>
         <Drawer.Navigator
           initialRouteName="ServerStats"

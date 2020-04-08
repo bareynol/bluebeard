@@ -7,7 +7,11 @@ import { View } from "react-native";
 
 export default function ServiceItem({logo, service, title}: Props){
   return (
-    <ListItem avatar>
+    <ListItem
+      noIndent
+      avatar
+      style={{backgroundColor: service.running ? 'transparent' : 'rgba(255,0,0,0.2)'}}
+    >
       <Left>
         {logo ? <Thumbnail square small source={logo} /> : <View style={{width: 36, height: 36}}></View> }
       </Left>
