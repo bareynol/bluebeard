@@ -4,7 +4,7 @@ import { Container, Content} from 'native-base';
 import { View, Button, Linking } from 'react-native';
 
 import AppHeader from 'components/AppHeader';
-import CurrentDownloads from 'components/CurrentDownloads';
+import TorrentInfo from 'components/TorrentInfo';
 
 export default function Transmission() {
 
@@ -18,7 +18,7 @@ export default function Transmission() {
           }} />
         </View>
         
-        <CurrentDownloads />
+        <TorrentInfo />
       </Content>
     </Container>
   )
