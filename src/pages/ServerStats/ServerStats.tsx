@@ -13,7 +13,7 @@ import Section from 'components/ui/Section';
 
 import { Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail, Card, CardItem, Text as NativeText } from 'native-base';
 import ServicesList from 'components/ServicesList';
-import { CurrentDownloadsSummary }from 'components/CurrentDownloads/CurrentDownloads';
+import { TorrentSummaryCard }from 'components/TorrentInfo';
 import AppHeader from 'components/AppHeader';
 import { getTorrents } from 'services/torrents/actions';
 
@@ -44,7 +44,7 @@ export default function ServerStats({navigation}) {
           <Button title="Request Movies" onPress={() => {navigation.navigate('Ombi')}} />
         </View>
 
-        <CurrentDownloadsSummary />
+        <TorrentSummaryCard />
 
         <View style={{marginTop: 20}}>
           <NativeText>Disks</NativeText>
