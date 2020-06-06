@@ -33,7 +33,7 @@ function TorrentSummaryCard(props) {
   const navigator = useNavigation();
 
   return (
-    <Card>
+    <Card style={{marginBottom: 20}}>
       <TorrentSummary />
       <CardItem>
         <Body>

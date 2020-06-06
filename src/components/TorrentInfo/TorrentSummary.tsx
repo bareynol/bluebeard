@@ -13,7 +13,7 @@ export default function TorrentSummary(props) {
   return (
     <>
       <CardItem header bordered style={{flexDirection: 'row', justifyContent: 'space-between', flexWrap: "wrap"}}>
-        <Text>Torrents</Text>
+        <Text>{`Torrents (${torrentSummary.total})`}</Text>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text note style={{marginRight: 20}}>
             <Icon name="arrow-down" style={{fontSize: 14}} /> {`${prettySize(torrentStats.downloadSpeed)}/s`}
@@ -34,12 +34,11 @@ export default function TorrentSummary(props) {
       <CardItem style={{backgroundColor: 'transparent'}} bordered>
         <Body>
           <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between', flexWrap: "wrap"}}>
-            <Text>{`Total Torrents: ${torrentSummary.total}`}</Text>
-            {torrentSummary.downloading > 0 && <Text>{`Downloading: ${torrentSummary.downloading}`}</Text>}
-            {torrentSummary.seeding > 0 && <Text>{`Seeding: ${torrentSummary.seeding}`}</Text>}
-            {torrentSummary.paused > 0 && <Text>{`Paused: ${torrentSummary.paused}`}</Text>}
-            {torrentSummary.queued > 0 && <Text>{`Queued: ${torrentSummary.queued}`}</Text>}
-            {torrentSummary.other > 0 && <Text>{`Other: ${torrentSummary.other}`}</Text>}
+            {torrentSummary.downloading > 0 && <Text style={{marginRight: 10}}>{`Downloading: ${torrentSummary.downloading}`}</Text>}
+            {torrentSummary.seeding > 0 && <Text style={{marginRight: 10}}>{`Seeding: ${torrentSummary.seeding}`}</Text>}
+            {torrentSummary.paused > 0 && <Text style={{marginRight: 10}}>{`Paused: ${torrentSummary.paused}`}</Text>}
+            {torrentSummary.queued > 0 && <Text style={{marginRight: 10}}>{`Queued: ${torrentSummary.queued}`}</Text>}
+            {torrentSummary.other > 0 && <Text style={{marginRight: 10}}>{`Other: ${torrentSummary.other}`}</Text>}
           </View>
         </Body>
       </CardItem>

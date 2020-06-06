@@ -2,7 +2,7 @@ import React from 'react';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import ServerStats from 'pages/ServerStats';
+import Dashboard from 'pages/Dashboard';
 import Background from 'components/ui/Background';
 import SideBar from 'components/SideBar';
 import Plex from 'pages/Plex';
@@ -27,7 +27,7 @@ const jackettLogo = require('images/jackett_logo.png');
 const Drawer = createDrawerNavigator();
 
 const SCREENS = [
-  {name: "Dashboard", component: ServerStats, icon: appLogo,},
+  {name: "Dashboard", component: Dashboard, icon: appLogo,},
   {name: "Ombi", component: Ombi, icon: ombiLogo, options: {serviceName: 'ombi', title: "Ombi (Easy Requests)"}},
   {name: "Sonarr", component: Sonarr, icon: sonarrLogo, options: {serviceName: 'sonarr', title: "Sonarr (TV Series)"}},
   {name: "Radarr", component: Radarr, icon: radarrLogo, options: {serviceName: 'radarr', title: "Radarr (Movies)"}},
@@ -43,7 +43,7 @@ export default function AppRouter() {
       <RefreshData />
       <Background>
         <Drawer.Navigator
-          initialRouteName="ServerStats"
+          initialRouteName="Dashboard"
           sceneContainerStyle={{backgroundColor: 'transparent'}}
           drawerContent={props => <SideBar {...props} />}
         >
