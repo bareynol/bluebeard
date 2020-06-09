@@ -9,7 +9,7 @@ const appLogo = require('images/BrianTV.png');
 export default function AppHeader({title}) {
   const navigation = useNavigation();
   return (
-    <Header>
+    <Header style={{paddingTop: 0}}>
       <Left style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
         <Button transparent onPress={() => navigation.openDrawer()}>
           <Icon name="menu" type="MaterialIcons" />

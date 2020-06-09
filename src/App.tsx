@@ -14,25 +14,20 @@ import { PersistGate } from 'redux-persist/integration/react';
 // import { PersistGate } from 'redux-persist/es/integration/react';
 
 import configureStore from './store';
+import theme from 'theme';
 
-import getTheme from '../native-base-theme/components';
-import customTheme from '../native-base-theme/variables/customTheme';
 
 import AppRouter from './AppRouter';
 
 import { StyleProvider } from 'native-base';
 
-
-
 export const {store, persistor} = configureStore()
 
 export default function App() {
-  
-
   return (
     <StoreProvider store={store}>
       <PersistGate persistor={persistor} loading={null}>
-        <StyleProvider style={getTheme(customTheme)}>
+        <StyleProvider style={theme}>
           <AppRouter />
         </StyleProvider>
       </PersistGate>

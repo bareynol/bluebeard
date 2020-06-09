@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
 import Dashboard from 'pages/Dashboard';
 import Background from 'components/ui/Background';
 import SideBar from 'components/SideBar';
@@ -14,6 +15,7 @@ import Transmission from 'pages/Transmission';
 import Jackett from 'pages/Jackett';
 import { Thumbnail } from 'native-base';
 import RefreshData from 'RefreshData';
+import ContentManagement from 'pages/ContentManagement';
 
 const appLogo = require('images/BrianTV.png');
 const plexLogo = require('images/plex_logo.png');
@@ -25,9 +27,10 @@ const tautulliLogo = require('images/tautulli_logo.png');
 const jackettLogo = require('images/jackett_logo.png');
 
 const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 const SCREENS = [
-  {name: "Dashboard", component: Dashboard, icon: appLogo,},
+  {name: "Dashboard", component: DashboardRouter, icon: appLogo,},
   {name: "Ombi", component: Ombi, icon: ombiLogo, options: {serviceName: 'ombi', title: "Ombi (Easy Requests)"}},
   {name: "Sonarr", component: Sonarr, icon: sonarrLogo, options: {serviceName: 'sonarr', title: "Sonarr (TV Series)"}},
   {name: "Radarr", component: Radarr, icon: radarrLogo, options: {serviceName: 'radarr', title: "Radarr (Movies)"}},
@@ -53,6 +56,15 @@ export default function AppRouter() {
         </Drawer.Navigator>
       </Background>
     </NavigationContainer>
+  )
+}
+
+function DashboardRouter() {
+  return (
+    <Stack.Navigator headerMode="none">
+      <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Screen name="ContentManagement" component={ContentManagement} />
+    </Stack.Navigator>
   )
 }
 
