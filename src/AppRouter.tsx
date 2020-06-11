@@ -17,6 +17,7 @@ import { Thumbnail } from 'native-base';
 import RefreshData from 'RefreshData';
 import ContentManagement from 'pages/ContentManagement';
 import ServerCommands from 'pages/ServerCommands';
+import Settings from 'pages/Settings';
 
 const appLogo = require('images/BrianTV.png');
 const plexLogo = require('images/plex_logo.png');
@@ -39,6 +40,7 @@ const SCREENS = [
   {name: "Tautulli", component: Tautulli, icon: tautulliLogo, options: {serviceName: 'tautulli', title: "Tautulli (Plex Stats)"}},
   {name: "Plex", component: Plex, icon: plexLogo, options: {serviceName: 'plex'}},
   {name: "Jackett", component: Jackett, icon: jackettLogo, options: {serviceName: 'jackett'}},
+  {name: "Settings", component: Settings,},
 ]
 
 export default function AppRouter() {

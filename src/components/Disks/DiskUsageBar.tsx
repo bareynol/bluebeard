@@ -1,8 +1,9 @@
 import React from 'react';
-import theme from 'theme';
+import { useCurrentTheme } from 'theme';
 import { StyleSheet, View } from 'react-native';
 
 export default function DiskUsageBar({disk}) {
+  const theme = useCurrentTheme();
   const barColor = disk.percentUsed > 85 ? theme.variables.brandDanger :
     disk.percentUsed > 50 ? theme.variables.brandWarning :
     theme.variables.brandPrimary
@@ -17,13 +18,11 @@ export default function DiskUsageBar({disk}) {
 const styles = StyleSheet.create({
   diskUsageContainer: {
     width: '100%',
-    borderColor: theme.variables.brandPrimary,
     borderWidth: 2,
     borderRadius: 10,
     height: 20,
   },
   diskUsage: {
-    backgroundColor: theme.variables.brandPrimary,
     height: '100%',
     borderRadius: 5,
   }

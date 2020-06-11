@@ -3,12 +3,19 @@ import { View, StyleSheet } from 'react-native';
 import { Text, Icon } from 'native-base';
 import DiskUsageBar from './DiskUsageBar';
 import { prettySize } from 'utils/formatters';
-import theme from 'theme';
+import { useCurrentTheme } from 'theme';
 
 export default function DiskSummary({disk, fixedToTop=false}: DiskSummaryProps) {
-
+  const theme = useCurrentTheme();
   return (
-    <View style={[styles.header, fixedToTop ? styles.fixedHeader : {}]}>
+    <View style={[
+      styles.header,
+      fixedToTop ? {
+        ...styles.fixedHeader,
+        borderRadius: theme.variables.cardBorderRadius,
+        borderColor: theme.variables.cardBorderColor,
+      } : {}
+    ]}>
       <View style={{flexGrow: 1}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text>{disk.label}</Text>
@@ -44,8 +51,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   fixedHeader: {
-    borderRadius: theme.variables.cardBorderRadius,
-    borderColor: theme.variables.cardBorderColor,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,

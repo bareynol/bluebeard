@@ -6,13 +6,14 @@ import { View, Alert } from 'react-native';
 import { prettySize } from 'utils/formatters';
 import DiskSummary from 'components/Disks/DiskSummary';
 
-import theme from 'theme';
+import { useCurrentTheme } from 'theme';
 import { deleteTvSeries, deleteMovie } from 'services/serverStats';
 
 export default function ContentManagement() {
   const dispatch = useDispatch()
   const diskIndex = useSelector(state => state.ui.contentManagementDiskIndex)
   const disk = useSelector(state => state.serverStats.stats?.disks?.[diskIndex]);
+  const theme = useCurrentTheme();
 
   function confirmDelete(contentId: number, contentTitle: string): any {
     Alert.alert(
@@ -50,17 +51,18 @@ export default function ContentManagement() {
       ) : (
         <Accordion
           dataArray={disk.data}
-          renderHeader={(content, expanded) => ContentItem(content, expanded, disk.hasTvSeries, confirmDelete)}
-          renderContent={disk.hasTvSeries? SeasonData : () => (<></>)}
+          renderHeader={(content, expanded) => ContentItem(content, expanded, disk.hasTvSeries, confirmDelete, theme)}
+          renderContent={(content) => disk.hasTvSeries? SeasonData(content, theme) : <></>}
           contentStyle={disk.hasMovies ? {padding: 0} : {}}
+          style={{borderColor: "#0c1017",}}
         />
       )}
     </Container>
   )
 }
 
-function ContentItem(content, expanded, hasTvSeries, onDelete) {
-
+function ContentItem(content, expanded, hasTvSeries, onDelete, theme) {
+  
   return (
     <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 10, borderTopWidth: 2, borderTopColor: theme.variables.accordionBorderColor}}>
       {hasTvSeries ? (
@@ -85,13 +87,13 @@ function ContentItem(content, expanded, hasTvSeries, onDelete) {
   )
 }
 
-function SeasonData(content) {
+function SeasonData(content, theme) {
   return (
     <View style={{paddingHorizontal: 20, backgroundColor: theme.variables.brandPrimary}}>
       {content.seasons.filter(season => season.statistics.sizeOnDisk > 0).map(season => (
-        <View key={`${content.id}-${season.seasonNumber}`} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text note style={{color: theme.variables.inverseTextColor}}>{`Season ${season.seasonNumber}`}</Text>
-          <Text note style={{color: theme.variables.inverseTextColor}}>{prettySize(season.statistics.sizeOnDisk)}</Text>
+        <View key={`${content.id}-${season.seasonNumber}`} style={{flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 10}}>
+          <Text style={{color: theme.variables.inverseTextColor}}>{`Season ${season.seasonNumber}`}</Text>
+          <Text style={{color: theme.variables.inverseTextColor}}>{prettySize(season.statistics.sizeOnDisk)}</Text>
         </View>
       ))}
     </View>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Icon } from 'native-base';
-import theme from 'theme';
+import { useCurrentTheme } from 'theme';
 
 export default function WebviewRefreshButton({webviewRef}) {
+  const theme = useCurrentTheme();
   function refreshWebview() {
     webviewRef.current.reload();
   }

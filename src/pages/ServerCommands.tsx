@@ -49,7 +49,7 @@ function Command({title, subtitle, onPress}) {
   }, [title, onPress])
 
   return (
-    <ListItem onPress={commandPressed}>
+    <ListItem noIndent onPress={commandPressed}>
       <View>
         <Text style={{alignSelf: 'flex-start'}}>{title}</Text>
         {subtitle ? (

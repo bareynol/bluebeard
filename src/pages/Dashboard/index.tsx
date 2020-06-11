@@ -1,25 +1,20 @@
 import ServerStats from './ServerStats';
 
-import React, { useEffect, useCallback } from 'react';
-import { Image, View, ScrollView, ProgressBarAndroid, ActivityIndicator } from 'react-native';
-import moment from 'moment';
+import React, { useEffect } from 'react';
+import { View } from 'react-native';
 
-import CpuTemperature from 'components/CpuTemperature';
-import MemUsage from 'components/MemUsage';
-
-import { Button, Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail, Card, CardItem, Text, Title, Icon } from 'native-base';
+import { Button, Container, Content, Text, Icon } from 'native-base';
 import ServicesList from 'components/ServicesList';
 import { TorrentSummaryCard }from 'components/TorrentInfo';
 import AppHeader from 'components/AppHeader';
-import { getTorrents } from 'services/torrents/actions';
 
 import SplashScreen from 'react-native-splash-screen'
 import Disks from 'components/Disks';
-import theme from 'theme';
+import { useCurrentTheme } from 'theme';
 
 
 export default function Dashboard({navigation}) {
-
+  const theme = useCurrentTheme();
   useEffect(() => {
     console.log("hiding splash")
     SplashScreen.hide();
