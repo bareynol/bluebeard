@@ -2,7 +2,7 @@ import React from "react";
 import Gauge from "components/Gauge";
 
 export default function CpuTemperature({temperature}){
-  const percentage = Math.min(100, 100 * (temperature / 75));
+  const percentage = Math.min(100,temperature);
   return (
     <Gauge
       percentage={percentage}

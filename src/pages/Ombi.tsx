@@ -6,6 +6,7 @@ import AppHeader from 'components/AppHeader';
 import WebViewWrapper from 'components/ui/WebViewWrapper'
 
 import {OMBI_USERNAME, OMBI_PASSWORD} from 'react-native-dotenv';
+import WebviewRefreshButton from 'components/ui/WebviewRefreshButton';
 
 export default function Ombi() {
   // const [expiration, setExpiration] = useState(null);
@@ -38,7 +39,7 @@ export default function Ombi() {
 
   return (
     <Container>
-      <AppHeader title="Ombi" />
+      <AppHeader title="Ombi" icons={<WebviewRefreshButton webviewRef={webviewRef} />} />
       <WebViewWrapper
         ref={webviewRef}
         domStorageEnabled={true}

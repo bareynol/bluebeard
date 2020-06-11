@@ -5,7 +5,6 @@ import moment from 'moment';
 
 import CpuTemperature from 'components/CpuTemperature';
 import MemUsage from 'components/MemUsage';
-import DiskInfo from 'components/DiskInfo';
 
 import { Text, Title } from 'native-base';
 import ServicesList from 'components/ServicesList';
@@ -13,60 +12,42 @@ import ServicesList from 'components/ServicesList';
 
 export default function ServerStats() {
   const isFetchingStats = useSelector(state => state.serverStats.isFetching);
-  const stats = useSelector(state => state.serverStats.stats);
+  const cpu = useSelector(state => state.serverStats.stats?.cpu);
+  const mem = useSelector(state => state.serverStats.stats?.mem);
   const statsError = useSelector(state => state.serverStats.error);
 
-  if (!stats && isFetchingStats) {
-    return (
-      <View  style={{alignItems: 'center'}}>
-        <ActivityIndicator color="white" size={100} />
-        <Title>Loading Server Stats...</Title>
+  // if (!stats && isFetchingStats) {
+  //   return (
+  //     <View  style={{alignItems: 'center'}}>
+  //       <ActivityIndicator color="white" size={100} />
+  //       <Title>Loading Server Stats...</Title>
+  //     </View>
+  //   )
+  // } else if ((!stats && !isFetchingStats) || statsError) {
+  //   return (
+  //     <View style={{alignItems: 'center'}}>
+  //       <Title>Error Loading Server Stats</Title>
+  //       <Title style={{color: 'red', fontSize: 30}}>¯\_(ツ)_/¯</Title>
+  //     </View>
+  //   )
+  // } else {
+  return (
+    <View style={{flexDirection: 'row'}}>
+      <View style={{alignItems: 'center', flex: 1}}>
+        <CpuTemperature temperature={cpu?.temperature || 0} />
+        <Text>CPU Temp.</Text>
       </View>
-    )
-  } else if ((!stats && !isFetchingStats) || statsError) {
-    return (
-      <View style={{alignItems: 'center'}}>
-        <Title>Error Loading Server Stats</Title>
-        <Title style={{color: 'red', fontSize: 30}}>¯\_(ツ)_/¯</Title>
+      <View style={{alignItems: 'center', flex: 1}}>
+        <MemUsage memUsed={mem?.percentUsed || 0} />
+        <Text>Mem. Usage</Text>
       </View>
-    )
-  } else {
-    return (
-      <>
-        {/* <View>
-          <Text>Disks</Text>
-          <View style={{flexDirection: 'row'}}>
-            {stats.hardware.disk.map((d, index) => (
-              <DiskInfo
-                disk={d}
-                key={d.label}
-                index={index}
-              />
-            ))}
-          </View>
-        </View> */}
-
-        <View style={{marginTop: 40}}>
-          <Text>Hardware</Text>
-          <View style={{flexDirection: 'row'}}>
-            <View style={{alignItems: 'center', flex: 1}}>
-              <CpuTemperature temperature={stats.hardware.cpu.temperature} />
-              <Text>CPU Temp.</Text>
-            </View>
-            <View style={{alignItems: 'center', flex: 1}}>
-              <MemUsage memUsed={stats.hardware.mem.percentUsed} />
-              <Text>Mem. Usage</Text>
-            </View>
-            
-          </View>
-        </View>
-
-        <ServicesList />
-        {/* <UptimeDisplay uptime={stats.hardware.uptime} /> */}
-      </>
-    );
-  }
+      
+    </View>
+  );
+  // }
 }
+
+/* <UptimeDisplay uptime={stats.hardware.uptime} /> */
 
 function UptimeDisplay({uptime}) {
   const duration = moment.duration(uptime, 'seconds');

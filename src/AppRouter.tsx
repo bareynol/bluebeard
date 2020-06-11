@@ -16,6 +16,7 @@ import Jackett from 'pages/Jackett';
 import { Thumbnail } from 'native-base';
 import RefreshData from 'RefreshData';
 import ContentManagement from 'pages/ContentManagement';
+import ServerCommands from 'pages/ServerCommands';
 
 const appLogo = require('images/BrianTV.png');
 const plexLogo = require('images/plex_logo.png');
@@ -64,6 +65,7 @@ function DashboardRouter() {
     <Stack.Navigator headerMode="none">
       <Stack.Screen name="Dashboard" component={Dashboard} />
       <Stack.Screen name="ContentManagement" component={ContentManagement} />
+      <Stack.Screen name="ServerCommands" component={ServerCommands} />
     </Stack.Navigator>
   )
 }

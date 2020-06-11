@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Svg from 'react-native-svg';
 import { VictoryLabel, VictoryPie } from "victory-native";
+import theme from 'theme';
 
 // CONSTANTS
 // width / height of the svg drawing area
@@ -61,7 +62,7 @@ export default function Gauge({percentage, width, valueLabel, label, fontSize}) 
           />
           <VictoryLabel
             textAnchor="middle"
-            style={{fill: "white", fontSize: VIEW_HEIGHT * 0.3}}
+            style={{fill: theme.variables.textColor, fontSize: VIEW_HEIGHT * 0.3}}
             x={VIEW_WIDTH / 2} y={VIEW_HEIGHT * 0.7}
             text={valueLabel}
           />

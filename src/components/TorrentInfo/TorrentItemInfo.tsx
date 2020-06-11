@@ -64,8 +64,8 @@ function StatusLabel({torrent}) {
 
 function ProgressBar(props) {
   return (
-    <View style={{width: props.width || "100%", borderColor: 'white', borderWidth: 2, borderRadius: 10, height: 20}}>
-      <View style={{backgroundColor: 'white', width: `${props.percentage}%`, height: '100%', borderRadius: 5, justifyContent: 'center'}} />
+    <View style={{width: props.width || "100%", borderColor: '#3183c8', borderWidth: 2, borderRadius: 10, height: 20}}>
+      <View style={{backgroundColor: '#3183c8', width: `${props.percentage}%`, height: '100%', borderRadius: 5, justifyContent: 'center'}} />
     </View>
   )
 }
