@@ -9,7 +9,7 @@ import rootReducer from 'services/rootReducer';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: []       // planned inclusion of app settings
+  whitelist: ['settings']       // planned inclusion of app settings
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

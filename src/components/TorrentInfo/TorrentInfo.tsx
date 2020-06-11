@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardItem, Text, Body, List, ListItem,} from "native-base";
-import { View, Button } from 'react-native';
+import { Card, CardItem, Text, Body, List, ListItem, Button,} from "native-base";
+import { View } from 'react-native';
 import { useSelector } from 'react-redux';
 import TorrentItemInfo from './TorrentItemInfo';
 import { useNavigation } from '@react-navigation/native';
@@ -33,12 +33,14 @@ function TorrentSummaryCard(props) {
   const navigator = useNavigation();
 
   return (
-    <Card>
+    <Card style={{marginTop: 10, marginBottom: 10}}>
       <TorrentSummary />
       <CardItem>
         <Body>
           <View style={{alignSelf: 'center'}}>
-            <Button title="View Details" onPress={() => {navigator.navigate('Transmission')}} />
+            <Button primary rounded small onPress={() => {navigator.navigate('Transmission')}}>
+              <Text>View Details</Text>
+            </Button>
           </View>
         </Body>
       </CardItem>

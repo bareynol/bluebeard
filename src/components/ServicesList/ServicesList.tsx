@@ -3,7 +3,7 @@ import { Card, List, ListItem, Left, Thumbnail, Text, Body, Right, CardItem } fr
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import ServiceItem from './ServiceItem';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 
 const plexLogo = require('images/plex_logo.png');
 const sonarrLogo = require('images/sonarr_logo.png');
@@ -14,22 +14,29 @@ const ombiLogo = require('images/ombi_logo.png');
 const tautulliLogo = require('images/tautulli_logo.png');
 
 export default function ServicesList() {
-  const services = useSelector(state => state.serverStats.stats.services.docker);
+  const services = useSelector(state => state.serverStats.stats?.services);
 
   return (
-    <Card style={{marginTop: 40}}>
+    <Card style={{marginTop: 10, marginBottom: 10}}>
       <CardItem header bordered>
         <Text>Services</Text>
       </CardItem>
-      <List>
-        <ServiceItem title="Plex" logo={plexLogo} service={services.plex} />
-        <ServiceItem title="Sonarr" logo={sonarrLogo} service={services.sonarr} />
-        <ServiceItem title="Radarr" logo={radarrLogo} service={services.radarr} />
-        <ServiceItem title="Transmission" logo={transmissionLogo} service={services.transmission} />
-        <ServiceItem title="Jackett" logo={jackettLogo} service={services.jackett} />
-        <ServiceItem title="Ombi" logo={ombiLogo} service={services.ombi} />
-        <ServiceItem title="Tautulli" logo={tautulliLogo} service={services.tautulli} />
-      </List>
+      {services ? (
+        <List>
+          <ServiceItem title="Plex" logo={plexLogo} service={services.plex} />
+          <ServiceItem title="Sonarr" logo={sonarrLogo} service={services.sonarr} />
+          <ServiceItem title="Radarr" logo={radarrLogo} service={services.radarr} />
+          <ServiceItem title="Transmission" logo={transmissionLogo} service={services.transmission} />
+          <ServiceItem title="Jackett" logo={jackettLogo} service={services.jackett} />
+          <ServiceItem title="Ombi" logo={ombiLogo} service={services.ombi} />
+          <ServiceItem title="Tautulli" logo={tautulliLogo} service={services.tautulli} />
+        </List>
+      ) : (
+        <CardItem style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+          <Text>Loading disks...</Text>
+          <ActivityIndicator />
+        </CardItem>
+      )}
     </Card>
   )
 }

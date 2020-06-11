@@ -57,7 +57,7 @@ function SideBarItem({state, navigation, descriptors, route, i}) {
 }
 
 function SideBarItemLabel({focused, color, label, serviceName=""}) {
-  const service = useSelector(state => state.serverStats.stats?.services?.docker?.[serviceName]);
+  const service = useSelector(state => state.serverStats.stats?.services?.[serviceName]);
 
   return (
     <View style={{}}>
