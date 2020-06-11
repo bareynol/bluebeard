@@ -21,28 +21,28 @@ export default function RefreshData() {
 
   function refreshHardware() {
     clearTimeout(refreshHardwareTimer);
-    console.log("fetching Hardware")
+    // console.log("fetching Hardware")
     fetchHardware();
     refreshHardwareTimer = setTimeout(refreshHardware, 5000);
   }
 
   function refreshTorrents() {
     clearTimeout(refreshTorrentTimer);
-    console.log("fetching Torrents")
+    // console.log("fetching Torrents")
     fetchTorrents();
     refreshTorrentTimer = setTimeout(refreshTorrents, 5000);
   }
 
   function refreshDisks() {
     clearTimeout(refreshDiskTimer);
-    console.log("fetching Disks")
+    // console.log("fetching Disks")
     fetchDisks();
     refreshDiskTimer = setTimeout(refreshDisks, 60000);
   }
 
   function refreshServices() {
     clearTimeout(refreshServiceTimer);
-    console.log("fetching Services")
+    // console.log("fetching Services")
     fetchServices();
     refreshServiceTimer = setTimeout(refreshServices, 60000);
   }
@@ -54,7 +54,7 @@ export default function RefreshData() {
     refreshServices();
 
     return () => {
-      console.log("clearing refreshData timer")
+      // console.log("clearing refreshData timer")
       clearTimeout(refreshHardwareTimer);
       clearTimeout(refreshTorrentTimer);
       clearTimeout(refreshDiskTimer);
