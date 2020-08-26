@@ -1,4 +1,4 @@
-# BrianTV Mobile App
+# Bluebeard Mobile App
 
 This is a React Native app that interfaces with a set of services related to running a Plex Media Server, such as the one found here: https://gitlab.com/bareynol/home-media-server
 
