@@ -18,7 +18,7 @@
     "@types/react-redux": "^7.1.7",
     "@types/redux-api-middleware": "^3.0.7",
     "@types/victory": "^33.1.4",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "native-base": "^2.13.12",
     "react": "16.9.0",
     "react-native": "0.61.5",
